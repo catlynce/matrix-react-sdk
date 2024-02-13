@@ -16,7 +16,9 @@ limitations under the License.
 
 import React from "react";
 
+import Field from "./Field";
 import AccessibleButton from "./AccessibleButton";
+import Dropdown from "./Dropdown";
 import { ValidatedServerConfig } from "../../../utils/ValidatedServerConfig";
 import { _t } from "../../../languageHandler";
 import TextWithTooltip from "./TextWithTooltip";
@@ -88,8 +90,24 @@ const ServerPicker: React.FC<IProps> = ({ title, dialogTitle, serverConfig, onSe
         desc = <span className="mx_ServerPicker_desc">{_t("auth|server_picker_description_matrix.org")}</span>;
     }
 
+    const options = ['Please select option', 'ION - Mbox', 'Mixvoip'].map((item) => {
+        return (
+            <div key={item}>
+                {item}
+            </div>
+        );
+    })
+
     return (
         <div className="mx_ServerPicker">
+            <Field element="select">
+                <option key={0} value="0">Please select provider</option>
+                <option key={1} value="ion">ION - Mbox</option>
+                <option key={2} value="mixvoip">Mixvoip</option>
+                <option key={3} value="luxembourg-online">Luxembourg online</option>
+                <option key={4} value="lhc">LHC</option>
+            </Field>
+            {/*
             <h2>{title || _t("common|homeserver")}</h2>
             {!disableCustomUrls ? (
                 <AccessibleButton
@@ -103,6 +121,7 @@ const ServerPicker: React.FC<IProps> = ({ title, dialogTitle, serverConfig, onSe
             </span>
             {editBtn}
             {desc}
+            */}
         </div>
     );
 };
